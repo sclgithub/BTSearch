@@ -186,6 +186,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.me) {
+            startActivity(new Intent(MainActivity.this, MeActivity.class));
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

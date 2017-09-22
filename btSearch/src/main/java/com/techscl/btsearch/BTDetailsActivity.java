@@ -41,6 +41,7 @@ public class BTDetailsActivity extends AppCompatActivity implements View.OnClick
     private TextView resId;
     private TextView resContent;
     private TextView count;
+    private TextView from;
     private ClipboardManager clipboardManager;
 
     @Override
@@ -79,6 +80,8 @@ public class BTDetailsActivity extends AppCompatActivity implements View.OnClick
             count.setText("热度：" + dataBean.getDownload());
             resId.setText(dataBean.getUriId());
             resContent.setText(dataBean.getUriContent());
+            from.setText("发布者：" + (dataBean.getPhoneNumber() != null ? dataBean.getPhoneNumber() : "无USIM卡") +
+                    "@" + (dataBean.getImei() != null ? dataBean.getImei() : "模拟器"));
             resId.setOnClickListener(this);
             resContent.setOnClickListener(this);
         }
@@ -104,6 +107,7 @@ public class BTDetailsActivity extends AppCompatActivity implements View.OnClick
         resId = (TextView) findViewById(R.id.resId);
         resContent = (TextView) findViewById(R.id.resContent);
         count = (TextView) findViewById(R.id.count);
+        from = (TextView) findViewById(R.id.from);
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
     }

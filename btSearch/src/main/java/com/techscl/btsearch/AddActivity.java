@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,17 +34,27 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private EditText content;
     private EditText resId;
     private EditText resContent;
+    private String imei, phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bt);
+        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+        try {
+
+            phoneNumber = telephonyManager.getLine1Number() != null ? telephonyManager.getLine1Number() : "无USIM卡";
+            imei = telephonyManager.getDeviceId() != null ? telephonyManager.getDeviceId() : "模拟器";//weixin://profile/gh_c28e28a2510d
+        } catch (Exception e) {
+            phoneNumber = "无USIM卡";
+            imei = "模拟器";
+        }
         initView();
         setSupportActionBar(toolbar);
         if (toolbar != null && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setTitle("添加");
+        setTitle(getString(R.string.add));
     }
 
     private void initView() {
@@ -108,6 +119,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         params.put("content", content.getText().toString());
         params.put("uriId", resId.getText().toString());
         params.put("uriContent", resContent.getText().toString());
+        params.put("imei", imei);
+        params.put("phoneNumber", phoneNumber);
         final AlertDialog alertDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(R.mipmap.ic_launcher)

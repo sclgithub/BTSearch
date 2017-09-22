@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">种子搜索</string>
-    <string name="search">搜索</string>
-    <string name="add">添加</string>
-    <string name="name">名称</string>
-    <string name="content">内容</string>
-    <string name="res_content">资源内容</string>
-    <string name="res_id">资源ID</string>
+    <string name="app_name">BTSearch</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
+    <string name="name">name</string>
+    <string name="content">content</string>
+    <string name="res_content">res</string>
+    <string name="res_id">resID</string>
+    <string name="me">Me</string>
 </resources>

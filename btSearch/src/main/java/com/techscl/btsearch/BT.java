@@ -73,6 +73,8 @@ public class BT implements Parcelable {
         private String uriId;
         private String uriContent;
         private long updateTime;
+        private String imei;
+        private String phoneNumber;
 
         public int getId() {
             return id;
@@ -138,6 +140,22 @@ public class BT implements Parcelable {
             this.updateTime = updateTime;
         }
 
+        public String getImei() {
+            return imei;
+        }
+
+        public void setImei(String imei) {
+            this.imei = imei;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -153,6 +171,8 @@ public class BT implements Parcelable {
             dest.writeString(this.uriId);
             dest.writeString(this.uriContent);
             dest.writeLong(this.updateTime);
+            dest.writeString(this.imei);
+            dest.writeString(this.phoneNumber);
         }
 
         public DataBean() {
@@ -167,6 +187,8 @@ public class BT implements Parcelable {
             this.uriId = in.readString();
             this.uriContent = in.readString();
             this.updateTime = in.readLong();
+            this.imei = in.readString();
+            this.phoneNumber = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
