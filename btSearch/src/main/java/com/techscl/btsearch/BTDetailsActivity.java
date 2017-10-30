@@ -54,7 +54,7 @@ public class BTDetailsActivity extends AppCompatActivity implements View.OnClick
         if (toolbar != null && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setTitle("资源详情");
+        setTitle(getString(R.string.details));
         BT.DataBean dataBean = getIntent().getParcelableExtra("data");
         if (dataBean != null) {
             OkHttpClientManager.getAsyn(AppConfig.SERVER + "api/bt/click/" + dataBean.getId(), new OkHttpClientManager.ResultCallback<ResponseInfo>() {

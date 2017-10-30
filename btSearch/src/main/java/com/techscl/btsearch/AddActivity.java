@@ -138,7 +138,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(ResponseInfo response) {
                 alertDialog.dismiss();
-                if (response.getCode() == 0)
+                if (response.getMessageCode() == 0)
                     finish();
             }
         }, params);

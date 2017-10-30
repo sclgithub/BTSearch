@@ -6,5 +6,6 @@
     <string name="content">content</string>
     <string name="res_content">res</string>
     <string name="res_id">resID</string>
+    <string name="details">Details</string>
     <string name="me">Me</string>
 </resources>

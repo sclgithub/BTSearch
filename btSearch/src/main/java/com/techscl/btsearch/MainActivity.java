@@ -21,12 +21,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.Request;
 
@@ -187,7 +190,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return true;
         }
         if (id == R.id.me) {
-            startActivity(new Intent(MainActivity.this, MeActivity.class));
+//            startActivity(new Intent(MainActivity.this, MeActivity.class));
+            Map<String, String> params = new HashMap<>();
+            params.put("payWay", "5");
+            params.put("ppId", "784a2c314cb24611b9834579b2bb0ec2");
+            params.put("pmId", "94421c98410b436d90a466f9363b2a80");
+            params.put("business_name", "app支付测试");
+            params.put("po_desc", "app支付测试");
+            params.put("po_business_num", "1008");
+            params.put("po_money", "0.01");
+            OkHttpClientManager.postAsyn("http://172.16.150.53:8088/alipay/pay", new OkHttpClientManager.ResultCallback<ResponseInfo>() {
+                @Override
+                public void onError(Request request, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(ResponseInfo response) {
+                    final String orderInfo = response.getData().toString();   // 订单信息
+
+                    Runnable payRunnable = new Runnable() {
+
+                        @Override
+                        public void run() {
+                            PayTask alipay = new PayTask(MainActivity.this);
+                            alipay.payV2(orderInfo, true);
+                        }
+                    };
+                    // 必须异步调用
+                    Thread payThread = new Thread(payRunnable);
+                    payThread.start();
+                }
+            }, params);
             return true;
         }
 
